@@ -1,0 +1,24 @@
+{
+    "system": {
+        "ip": "http://127.0.0.1:5500",
+        "id": "Lab-Camera"
+    },
+    "camera": {
+        "gain": "2",
+        "exposure": "1000",
+        "vpixels": 4095,
+        "hpixels": 3042
+    },
+    "lens": {
+        "name": "Edmund 50mm",
+        "focus": 50,
+        "oangle": 6.8,
+        "hview": 16.18,
+        "vview": 12.02
+    },
+    "deployment": {
+        "time_sec": 120,
+        "model": "yolov8s.pt",
+        "status": "Model changed"
+    }
+}

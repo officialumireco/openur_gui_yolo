@@ -1,0 +1,87 @@
+<!-- 
+ * Project Name: Generic GUI
+ * File Name: home.html
+ * Description: Generic User Interface for Running YOLO model and viewing results 
+ * Author: Umi-Reco 
+ * License: MIT (see LICENSE file for details)
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_labcam.css') }}">
+    <title>Real-time AI</title>
+</head>
+
+<body>
+
+    <script src="{{ url_for('static', filename='js/plotly-latest.min.js') }}"></script>  
+    <script src="{{ url_for('static', filename='js/lib_labcam.js') }}"></script>  
+
+    <div class="container">
+        <div class="left-section">
+            <div class="left-top">
+                <div class="special-section">
+                    <h2>Real-time AI</h2>
+                    <h3>Model Select</h3>
+                    <div class="input-section">
+                        <select id="div_model_dropdown"><option value="">Select an option</option></select>
+                    </div>
+                    <div class="input-section"><button onclick=func_set_deploy()>Upload New Model</button></div>
+                    <h3>Device Status</h3>
+                    <p id="div_dir_id">NA</p>
+                    <p id="div_sys_memory">NA</p>
+                    <p id="div_sys_datetime">NA</p>
+                </div>
+            </div>
+
+            <div class="left-bottom">
+                <div class="special-section">
+                    <h3>Camera Setup</h3>
+
+                    <h4 id="div_gain">Gain (1-100)</h4>
+                    <div class="input-section"><input type="number" id="data_gain" placeholder="0"></div>
+
+                    <h4 id="div_exposure">Exposure (1-2000ms)</h4>
+                    <div class="input-section"><input type="number" id="data_exposure" placeholder="0"></div>
+                    
+                    <div class="input-section"><button onclick=func_save_camera()>Save Settings</button></div>
+
+                </div>
+
+                <div class="special-section">
+                    <h3>Operations</h3>
+                    <div class="input-section"><button onclick=func_api_ai_start()>Start AI</button></div> 
+                    <div class="input-section"><button onclick=func_api_ai_stop()>Stop AI</button></div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="right-section">
+            <div class="right-bottom">
+                <div class="special-section">
+                    <h3 id="div_cam_temp">Status</h3>
+                    <div class="input-section"><input type="text" id="data_status" placeholder="Device in Standby Mode"></div>
+                </div>
+            </div>
+
+            <div class="right-top">
+                <div class="special-section">
+                        <img class="video-section" src="{{ url_for('video_feed') }}">
+                </div>
+            </div>
+                        
+        </div>
+    </div>
+
+    <script>
+        setInterval(func_api_get_system_status, 3000);
+        func_api_get_control_status();
+        func_api_models();
+    </script>
+</body>
+</html>
